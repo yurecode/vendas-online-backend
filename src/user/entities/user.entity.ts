@@ -21,7 +21,7 @@ export class UserEntity {
   password: string;
 
   @Column({ name: 'type_user', nullable: false })
-  typeUser: Number;
+  typeUser: number;
 
   @CreateDateColumn({name: 'created_at'})
   createdAt: Date;
