@@ -37,7 +37,7 @@ export class CreateTableAddress1707339443040 implements MigrationInterface {
     public async down(queryRunner: QueryRunner): Promise<void> {
         queryRunner.query(`
 
-            DROP TABLE IF EXISTS PUBLIC.STATE;
+            DROP TABLE IF EXISTS public.adress;
         
         `)
     }

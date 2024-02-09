@@ -28,7 +28,7 @@ export class CreateTableState1707339277692 implements MigrationInterface {
     public async down(queryRunner: QueryRunner): Promise<void> {
         queryRunner.query(`
 
-            DROP TABLE IF EXISTS PUBLIC.STATE;
+            DROP TABLE IF EXISTS public.state;
 
         `)
     }
