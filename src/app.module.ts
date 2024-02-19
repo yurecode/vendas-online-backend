@@ -22,6 +22,7 @@ import { CacheModule } from './cache/cache.module';
       entities: [`${__dirname}/**/*.entity{.js,.ts}`],
       migrations: [`${__dirname}/migrations/{.ts,*.js}`],
       migrationsRun: true,
+      logging: true
     }),
     UserModule,
     StateModule,
