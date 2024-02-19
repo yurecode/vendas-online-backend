@@ -29,8 +29,20 @@ export class UserService {
       where: {
         id: userId,
       },
-      relations: ['addresses'],
+      relations: {
+        addresses: {
+          city: {
+            state: true,
+          }
+        }
+      },
     });
+  }
+
+  async findOne(id: number){
+    return await this.userRepository.findOne({
+      where:{id: 2}
+    })
   }
 
   async getAllUser(): Promise<UserEntity[]> {
