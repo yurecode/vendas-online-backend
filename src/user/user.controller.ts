@@ -22,18 +22,11 @@ export class UserController {
   }
 
   @Get('/:userId')
-  async getUserById(@Param('userId') userId: number): Promise<ReturnUserDto>{
+  async getUserById(@Param('userId') userId: number){
     return new ReturnUserDto(
-      await this.userService.getUserByIdUsingRelations(userId));
+      await this.userService.getUserByIdUsingRelations(userId),
+      );
   }
-
-
-  @Get('/:userId/teste')
-  async teste(@Param('userId') userId: number): Promise<ReturnUserDto>{
-    return new ReturnUserDto(
-      await this.userService.findOne(2));
-  }
-
 
   // @Get('/:userId')
   // async getUserBId(@Param('userId') userId: number): Promise<UserEntity>{
