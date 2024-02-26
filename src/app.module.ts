@@ -6,6 +6,10 @@ import { StateModule } from './state/state.module';
 import { CityModule } from './city/city.module';
 import { AddressModule } from './address/address.module';
 import { CacheModule } from './cache/cache.module';
+import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './guards/roles.guard';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -22,14 +26,21 @@ import { CacheModule } from './cache/cache.module';
       entities: [`${__dirname}/**/*.entity{.js,.ts}`],
       migrations: [`${__dirname}/migrations/{.ts,*.js}`],
       migrationsRun: true,
+      logging: false
     }),
     UserModule,
     StateModule,
     CityModule,
     AddressModule,
     CacheModule,
+    AuthModule,
+    JwtModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [{
+    provide: APP_GUARD,
+    useClass: RolesGuard,
+    },
+  ],
 })
 export class AppModule {}
