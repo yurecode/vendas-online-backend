@@ -1,6 +1,6 @@
 import { AddressEntity } from '../../address/entities/address.entity';
 import { StateEntity } from '../../state/entities/state.entity';
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity({ name: 'city', schema: "public"})
 export class CityEntity {
