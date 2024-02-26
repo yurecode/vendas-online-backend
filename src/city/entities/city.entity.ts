@@ -17,7 +17,7 @@ export class CityEntity {
   createdAt: Date;
 
   @UpdateDateColumn({name: 'updated_at'})
-  updateAt: Date;
+  updatedAt: Date;
 
   @OneToMany(() => AddressEntity, (address) => address.city)
   addresses?: AddressEntity[];
