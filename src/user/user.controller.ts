@@ -28,8 +28,4 @@ export class UserController {
       );
   }
 
-  // @Get('/:userId')
-  // async getUserBId(@Param('userId') userId: number): Promise<UserEntity>{
-  //   return this.userService.getUserByIdUsingRelations(userId);  
-  // }
 }
