@@ -1,6 +1,6 @@
 import { CategoryEntity } from "../entities/category.entity";
 
-export const categoryMock: CategoryEntity = {
+export const categoryMock: any = {
     createdAt: new Date(),
     id: 9685234,
     name: 'categoryMock',

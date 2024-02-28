@@ -1,4 +1,3 @@
-import { query } from "express";
 import { MigrationInterface, QueryRunner } from "typeorm";
 
 export class InsertInCity1707399447469 implements MigrationInterface {
