@@ -3,10 +3,9 @@ import { Roles } from '../decorators/roles.decorator';
 import { UserType } from '../user/enum/user-type.enum';
 import { InsertCartDTO } from './dtos/insert-cart.dto';
 import { CartService } from './cart.service';
-import { UserId } from 'src/decorators/user-id.decorator';
+import { UserId } from '../decorators/user-id.decorator';
 import { ReturnCartDTO } from './dtos/return-cart.dto';
 import { DeleteResult } from 'typeorm';
-import { CartEntity } from './entities/cart.entity';
 import { UpdateCartDTO } from './dtos/update-cart.dto';
 
 @Roles(UserType.User, UserType.Admin)
