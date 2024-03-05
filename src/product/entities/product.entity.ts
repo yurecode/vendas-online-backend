@@ -1,4 +1,4 @@
-import { CartProductEntity } from "src/cart-product/entities/cart-product.entity";
+import { CartProductEntity } from "../../cart-product/entities/cart-product.entity";
 import { CategoryEntity } from "../../category/entities/category.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
@@ -13,7 +13,7 @@ export class ProductEntity {
     @Column({ name: 'category_id', nullable: false })
     categoryId: number;
 
-    @Column({ name: 'price', type: "decimal", precision: 10, scale: 2, nullable: false })
+    @Column({ name: 'price', type: "decimal", nullable: false })
     price: number;
 
     @Column({ name: 'image', nullable: false })
