@@ -7,16 +7,16 @@ export class ProductEntity {
     @PrimaryGeneratedColumn('rowid')
     id: number;
 
-    @Column({ name: 'name', nullable: false})
+    @Column({ name: 'name', nullable: false })
     name: string;
 
-    @Column({ name: 'category_id', nullable: false})
+    @Column({ name: 'category_id', nullable: false })
     categoryId: number;
 
-    @Column({ name: 'price', nullable: false})
+    @Column({ name: 'price', type: "decimal", precision: 10, scale: 2, nullable: false })
     price: number;
 
-    @Column({ name: 'image', nullable: false})
+    @Column({ name: 'image', nullable: false })
     image: string;
 
     @CreateDateColumn({ name: 'created_at' })
