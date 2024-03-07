@@ -1,17 +1,18 @@
-import { BadGatewayException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadGatewayException, BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { hash } from 'bcrypt';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dtos/createUser.dto';
 import { UserEntity } from './entities/user.entity';
 import { UserType } from './enum/user-type.enum';
+import { UpdatePasswordDTO } from './dtos/update-password.dto';
+import { createPasswordHashed, validatePassword } from '../utils/password';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-  ) {}
+  ) {} 
 
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
 
@@ -21,15 +22,13 @@ export class UserService {
       throw new BadGatewayException('email registered in system');
     }
 
-    const saltOrRounds = 10;
-
-    const passwordHashed = await hash(createUserDto.password, saltOrRounds);
+    const passwordHashed = await createPasswordHashed(createUserDto.password);
 
     return this.userRepository.save({
       ...createUserDto,
       typeUser: UserType.User,
       password: passwordHashed,
-    });
+    })
   }
 
   async getUserByIdUsingRelations(userId: number){
@@ -83,5 +82,24 @@ export class UserService {
     }
 
     return user;
+  }
+
+  async updatePasswordUser(updatePasswordDTO: UpdatePasswordDTO, userId: number): Promise <UserEntity> {
+    const user = await this.findUserById(userId);
+
+    const passwordHashed = await createPasswordHashed(
+      updatePasswordDTO.newPassword,
+    );
+
+    const isMatch = await validatePassword(updatePasswordDTO.lastPassword, user.password || '') ;
+
+    if(!isMatch) {
+      throw new BadRequestException('Last password invalid');
+    }
+
+    return this.userRepository.save({
+      ...user,
+      password: passwordHashed,
+    });
   }
 }
