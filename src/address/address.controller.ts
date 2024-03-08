@@ -5,7 +5,7 @@ import { AddressEntity } from './entities/address.entity';
 import { Roles } from '../decorators/roles.decorator';
 import { UserType } from '../user/enum/user-type.enum';
 import { UserId } from '../decorators/user-id.decorator';
-import { ReturnAddressDto } from './dtos/returnAdress.dto';
+import { ReturnAddressDto } from './dtos/returnAddress.dto';
 
 @Roles(UserType.User, UserType.Admin)
 @Controller('address')
