@@ -16,7 +16,7 @@ export class CartController {
     ){}
     @UsePipes(ValidationPipe)
     @Post()
-    async creteCart(@Body() insertCart: InsertCartDTO, @UserId() userId: number): Promise<ReturnCartDTO> {
+    async createCart(@Body() insertCart: InsertCartDTO, @UserId() userId: number): Promise<ReturnCartDTO> {
         return new ReturnCartDTO(await this.cartService.insertProductInCart(insertCart, userId),);
     }
 

@@ -78,7 +78,7 @@
     },
     "collectCoverageFrom": [
       "**/*.(t|j)s",
-      "!**/*.main.ts",
+      "!**/*main.ts",
       "!**/migrations/*",
       "!**/*.module.(t|j)s",
       "!**/*.dto.(t|j)s",
