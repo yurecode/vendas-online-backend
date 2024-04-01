@@ -30,7 +30,7 @@ import { CartProductModule } from './cart-product/cart-product.module';
       entities: [`${__dirname}/**/*.entity{.js,.ts}`],
       migrations: [`${__dirname}/migrations/{.ts,*.js}`],
       migrationsRun: true,
-      logging: false
+      logging: false,
     }),
     UserModule,
     StateModule,
@@ -45,9 +45,10 @@ import { CartProductModule } from './cart-product/cart-product.module';
     CartProductModule,
   ],
   controllers: [],
-  providers: [{
-    provide: APP_GUARD,
-    useClass: RolesGuard,
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
   ],
 })

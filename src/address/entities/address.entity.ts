@@ -10,7 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ name: 'address', schema: "public" })
+@Entity({ name: 'address', schema: 'public' })
 export class AddressEntity {
   @PrimaryGeneratedColumn('rowid')
   id: number;
@@ -43,5 +43,4 @@ export class AddressEntity {
   @ManyToOne(() => CityEntity, (city) => city.addresses)
   @JoinColumn({ name: 'city_id', referencedColumnName: 'id' })
   city?: CityEntity;
-
 }
