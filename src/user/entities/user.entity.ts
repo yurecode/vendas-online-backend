@@ -1,3 +1,4 @@
+import { OrderEntity } from 'src/order/entities/order.entity';
 import { AddressEntity } from '../../address/entities/address.entity';
 import {
   Column,
@@ -8,7 +9,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ name: 'user' ,  schema: "public"})
+@Entity({ name: 'user', schema: 'public' })
 export class UserEntity {
   @PrimaryGeneratedColumn('rowid')
   id: number;
@@ -39,4 +40,7 @@ export class UserEntity {
 
   @OneToMany(() => AddressEntity, (address) => address.user)
   addresses?: AddressEntity[];
+
+  @OneToMany(() => OrderEntity, (order) => order.address)
+  orders?: OrderEntity[];
 }

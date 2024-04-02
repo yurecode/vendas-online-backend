@@ -15,7 +15,7 @@ import { updateCartMock } from '../../cart/__mocks__/update-cart.mock';
 describe('CartProductService', () => {
   let service: CartProductService;
   let productService: ProductService;
-  let cartProductRepository: Repository<CartProductEntity>; 
+  let cartProductRepository: Repository<CartProductEntity>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -34,12 +34,15 @@ describe('CartProductService', () => {
             delete: jest.fn().mockResolvedValue(returnDeleteMock),
           },
         },
-        CartProductService],
+        CartProductService,
+      ],
     }).compile();
 
     service = module.get<CartProductService>(CartProductService);
-    productService =  module.get<ProductService>(ProductService);
-    cartProductRepository = module.get<Repository<CartProductEntity>>(getRepositoryToken(CartProductEntity));
+    productService = module.get<ProductService>(ProductService);
+    cartProductRepository = module.get<Repository<CartProductEntity>>(
+      getRepositoryToken(CartProductEntity),
+    );
   });
 
   it('should be defined', () => {
@@ -49,15 +52,20 @@ describe('CartProductService', () => {
   });
 
   it('should return Delete Result after delete product', async () => {
-    const deleteResult = await service.deleteProductCart(productMock.id, cartMock.id);
+    const deleteResult = await service.deleteProductCart(
+      productMock.id,
+      cartMock.id,
+    );
 
     expect(deleteResult).toEqual(returnDeleteMock);
-  })
+  });
 
   it('should return error in exception delete', async () => {
     jest.spyOn(cartProductRepository, 'delete').mockRejectedValue(new Error());
-    
-    expect(service.deleteProductCart(productMock.id, cartMock.id)).rejects.toThrowError();
+
+    expect(
+      service.deleteProductCart(productMock.id, cartMock.id),
+    ).rejects.toThrowError();
   });
 
   it('should return CartProduct after create', async () => {
@@ -65,14 +73,16 @@ describe('CartProductService', () => {
       insertCartMock,
       cartMock.id,
     );
-    
+
     expect(productCart).toEqual(cartProductMock);
   });
 
   it('should return error in exception save', async () => {
     jest.spyOn(cartProductRepository, 'save').mockRejectedValue(new Error());
-    
-    expect(service.createProductInCart(insertCartMock, cartMock.id)).rejects.toThrowError();
+
+    expect(
+      service.createProductInCart(insertCartMock, cartMock.id),
+    ).rejects.toThrowError();
   });
 
   it('should return CartProduct if exist', async () => {
@@ -80,31 +90,34 @@ describe('CartProductService', () => {
       productMock.id,
       cartMock.id,
     );
-    
+
     expect(productCart).toEqual(cartProductMock);
   });
 
   it('should return error if not found', async () => {
     jest.spyOn(cartProductRepository, 'findOne').mockResolvedValue(undefined);
-    
-    expect(service.verifyProductInCart(productMock.id,
-      cartMock.id,)).rejects.toThrowError(NotFoundException);
+
+    expect(
+      service.verifyProductInCart(productMock.id, cartMock.id),
+    ).rejects.toThrowError(NotFoundException);
   });
 
   it('should return error in exception verifyProductCart', async () => {
     jest.spyOn(cartProductRepository, 'findOne').mockRejectedValue(new Error());
-    
-    expect(service.verifyProductInCart(productMock.id,
-      cartMock.id,)).rejects.toThrowError(Error);
 
+    expect(
+      service.verifyProductInCart(productMock.id, cartMock.id),
+    ).rejects.toThrowError(Error);
   });
 
   it('should return error in exception insertProductInCart', async () => {
-    jest.spyOn(productService, 'findProductById').mockRejectedValue(new NotFoundException);
-    
-    expect(service.insertProductInCart(insertCartMock,
-      cartMock,)).rejects.toThrowError(NotFoundException);      
+    jest
+      .spyOn(productService, 'findProductById')
+      .mockRejectedValue(new NotFoundException());
 
+    expect(
+      service.insertProductInCart(insertCartMock, cartMock),
+    ).rejects.toThrowError(NotFoundException);
   });
 
   it('should return cart product if not exist cart', async () => {

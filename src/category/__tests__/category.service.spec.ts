@@ -52,17 +52,15 @@ describe('CategoryService', () => {
     jest.spyOn(categoryRepository, 'find').mockRejectedValue(new Error());
 
     expect(service.findAllCategories()).rejects.toThrowError();
-
   });
 
   it('should return error if exist category name', async () => {
     expect(service.createCategory(createCategoryMock)).rejects.toThrowError();
   });
 
-
   it('should return category after save', async () => {
     jest.spyOn(categoryRepository, 'findOne').mockResolvedValue(undefined);
-    
+
     const category = await service.createCategory(createCategoryMock);
 
     expect(category).toEqual(categoryMock);
@@ -77,13 +75,15 @@ describe('CategoryService', () => {
   it('should return category in find by name', async () => {
     const category = await service.findCategoryByName(categoryMock.name);
 
-    expect (category).toEqual(categoryMock);
+    expect(category).toEqual(categoryMock);
   });
 
   it('should return error if category find by name empty', async () => {
     jest.spyOn(categoryRepository, 'findOne').mockResolvedValue(undefined);
 
-    expect (service.findCategoryByName(categoryMock.name)).rejects.toThrowError();
+    expect(
+      service.findCategoryByName(categoryMock.name),
+    ).rejects.toThrowError();
   });
 
   it('should return category in find by id ', async () => {

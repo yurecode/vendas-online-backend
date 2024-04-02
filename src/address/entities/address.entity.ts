@@ -1,3 +1,4 @@
+import { OrderEntity } from 'src/order/entities/order.entity';
 import { CityEntity } from '../../city/entities/city.entity';
 import { UserEntity } from '../../user/entities/user.entity';
 import {
@@ -6,11 +7,12 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ name: 'address', schema: "public" })
+@Entity({ name: 'address', schema: 'public' })
 export class AddressEntity {
   @PrimaryGeneratedColumn('rowid')
   id: number;
@@ -44,4 +46,6 @@ export class AddressEntity {
   @JoinColumn({ name: 'city_id', referencedColumnName: 'id' })
   city?: CityEntity;
 
+  @OneToMany(() => OrderEntity, (order) => order.address)
+  orders?: OrderEntity[];
 }

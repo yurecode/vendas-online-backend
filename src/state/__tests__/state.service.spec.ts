@@ -44,4 +44,4 @@ describe('StateService', () => {
 
     expect(service.getAllState()).rejects.toThrowError();
   });
-})
+});

@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { CreateUserDto } from './dtos/createUser.dto';
 import { UserEntity } from './entities/user.entity';
 import { UserService } from './user.service';
@@ -23,21 +32,23 @@ export class UserController {
   async getAllUser(): Promise<ReturnUserDto[]> {
     return (await this.userService.getAllUser()).map(
       (userEntity) => new ReturnUserDto(userEntity),
-      );
+    );
   }
 
   @Roles(UserType.Admin)
   @Get('/:userId')
-  async getUserById(@Param('userId') userId: number){
+  async getUserById(@Param('userId') userId: number) {
     return new ReturnUserDto(
       await this.userService.getUserByIdUsingRelations(userId),
-      );
+    );
   }
 
   @Roles(UserType.Admin, UserType.User)
   @Patch()
-  async updatePasswordUser(@Body() updatePasswordDTO: UpdatePasswordDTO, @UserId() userId: number): Promise<UserEntity> {
+  async updatePasswordUser(
+    @Body() updatePasswordDTO: UpdatePasswordDTO,
+    @UserId() userId: number,
+  ): Promise<UserEntity> {
     return this.userService.updatePasswordUser(updatePasswordDTO, userId);
   }
-
 }
