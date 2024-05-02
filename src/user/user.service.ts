@@ -52,12 +52,6 @@ export class UserService {
     });
   }
 
-  // async findOne(id: number) {
-  //   return await this.userRepository.findOne({
-  //     where: { id: id },
-  //   });
-  // }
-
   async getAllUser(): Promise<UserEntity[]> {
     return this.userRepository.find();
   }
